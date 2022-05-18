@@ -108,43 +108,35 @@ function getRefNo(msg){
   return refNumber;
 }
 
-// function getDate(msg) {
-//   const moment = require('moment');
-//   var dates="";
-//   if (typeof msg === 'string') {
-//     msg = msg.toLowerCase().split(' ');
-//   }
-//   const indexArr = msg.reduce(function(a, e, i) {
-//     console.log("a", a);
-//     console.log("e", e);
-//     console.log("i", i);
-//     if (e === 'on'){
-//       a.push(i) 
-//     }
-//     return a;
-//   }, 
-//   []);
-
-//   if (indexArr.length === 0) {
-//     return '';
-//   } else {
-//     const format = ["DD-MM-YYYY","DD/MM/YYYY","DD-MMM-YYYY","DD-MM-YY","DD/MM/YY","DDMMMYY"]
-//     for (let index1 = 0; index1 < indexArr.length; index1++) {
-//       const element1 = indexArr[index1];
-//       console.log(" element1element1element1element1element1 {{{  <<<<>>>>>",element1+1)
-//       for (let index2 = 0; index2 < format.length; index2++) {
-//         const element2 = format[index2];
-//         //console.log(element1+1,element2)
-//         let date = moment(msg[element1+1],element2,true)
-//         if(date.isValid()){
-//           return date.format("DD MMM YYYY");
-//         }
-//         dates=date;
-//       }
-//     }
-//     return dates;
-//   }
-// }
+function getDate(msg) {
+  const moment = require('moment');
+  var dates="";
+  if (typeof msg === 'string') {
+    msg = msg.toLowerCase().split(' ');
+  }
+  const indexArr = msg.reduce(function(a, e, i) {if (e === 'on'){a.push(i)  }
+  return a;}, 
+  []);
+  if (indexArr.length === 0) {
+    return '';
+  } else {
+    const format = ["DD-MM-YYYY","DD/MM/YYYY","DD-MMM-YYYY","DD-MM-YY","DD/MM/YY","DDMMMYY"]
+    for (let index1 = 0; index1 < indexArr.length; index1++) {
+      const element1 = indexArr[index1];
+      console.log(" element1element1element1element1element1 {{{  <<<<>>>>>",element1+1)
+      for (let index2 = 0; index2 < format.length; index2++) {
+        const element2 = format[index2];
+        //console.log(element1+1,element2)
+        let date = moment(msg[element1+1],element2,true)
+        if(date.isValid()){
+          return date.format("DD MMM YYYY");
+        }
+        dates=date;
+      }
+    }
+    return dates;
+  }
+}
 
 
 
@@ -166,43 +158,43 @@ function getRefNo(msg){
 
 
 
-function getdate(msg){
-  var getdatedata = "";
-  console.log("\n111"+msg);
-  if(msg.toLowerCase().includes('on')==true){
-    var dataList = msg.toLowerCase().split("on");
-    console.log("\n222"+ dataList );
-    var str= ["15/12/2020 by INR 3,211.00 towards purchase. Avl"];
-    console.log( "\n333"+ msg.toLowerCase().split("on"));
-    const dateReg = new RegExp('r^(0?[1-9]|[1-2][0-9]|3[01])[\/](0?[1-9]|1[0-2])');
-    console.log("\n444"+dateReg);
-    var data = "";
-   // console.log("$$$$$$",dataList);
-    if (str.length == 0) {
-      console.log("iff", dateReg.hasMatch(str));
-      console.log("!!!!!", (str));
+// function getdate(msg){
+//   var getdatedata = "";
+//   console.log("\n111"+msg);
+//   if(msg.toLowerCase().includes('on')==true){
+//     var dataList = msg.toLowerCase().split("on");
+//     console.log("\n222"+ dataList );
+//     var str= ["15/12/2020 by INR 3,211.00 towards purchase. Avl"];
+//     console.log( "\n333"+ msg.toLowerCase().split("on"));
+//     const dateReg = new RegExp('r^(0?[1-9]|[1-2][0-9]|3[01])[\/](0?[1-9]|1[0-2])');
+//     console.log("\n444"+dateReg);
+//     var data = "";
+//    // console.log("$$$$$$",dataList);
+//     if (str.length == 0) {
+//       console.log("iff", dateReg.hasMatch(str));
+//       console.log("!!!!!", (str));
 
-      if(dateReg.test(str) == true){
-       console.log( "{}{}{}{}",dateReg.test(str));
-        // var refMatch= dateReg.exec(dataList[1]);
-        // data = refMatch==null?"":refMatch[1].toString();
-      }
-    } else {
-      console.log("elsee");
-      if(dateReg.hasMatch(dataList[0]) == true){
-        var refMatch= dateReg.firstMatch(dataList[1]);
-        data = refMatch==null?"":refMatch.group(0).toString();
-        console.log("date match"+data);
-      }
-    }
-    if(data.includes(")")){
-      data = data.split(")")[0];
-    }
+//       if(dateReg.test(str) == true){
+//        console.log( "{}{}{}{}",dateReg.test(str));
+//         // var refMatch= dateReg.exec(dataList[1]);
+//         // data = refMatch==null?"":refMatch[1].toString();
+//       }
+//     } else {
+//       console.log("elsee");
+//       if(dateReg.hasMatch(dataList[0]) == true){
+//         var refMatch= dateReg.firstMatch(dataList[1]);
+//         data = refMatch==null?"":refMatch.group(0).toString();
+//         console.log("date match"+data);
+//       }
+//     }
+//     if(data.includes(")")){
+//       data = data.split(")")[0];
+//     }
     
-    getdatedata=data;
-  } 
-   return getdatedata;
-}
+//     getdatedata=data;
+//   } 
+//    return getdatedata;
+// }
 
 module.exports = router;
 
