@@ -1,0 +1,6 @@
+apps:
+- script: '.bin/www'
+name: 'Sms Extraction API - 98'
+watch: false
+node_args: '--max_old_space_size=30720'
+exec_mode: 'cluster'
